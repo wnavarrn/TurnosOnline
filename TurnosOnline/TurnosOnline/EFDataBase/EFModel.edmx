@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PwaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CentroMedico">
+          <Key>
+            <PropertyRef Name="IdCentroMedico" />
+          </Key>
+          <Property Name="IdCentroMedico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCentro" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Dias">
+          <Key>
+            <PropertyRef Name="IdDia" />
+          </Key>
+          <Property Name="IdDia" Type="int" Nullable="false" />
+          <Property Name="Dia" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Especialidades">
+          <Key>
+            <PropertyRef Name="IdEspecialidad" />
+          </Key>
+          <Property Name="IdEspecialidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrpcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="varchar" MaxLength="10" />
+          <Property Name="IsFullDay" Type="bit" />
+        </EntityType>
+        <EntityType Name="HorariosProfesional">
+          <Key>
+            <PropertyRef Name="IdProfesional" />
+            <PropertyRef Name="IdCentroMedico" />
+            <PropertyRef Name="IdDia" />
+            <PropertyRef Name="HoraDesde" />
+          </Key>
+          <Property Name="IdProfesional" Type="int" Nullable="false" />
+          <Property Name="IdCentroMedico" Type="int" Nullable="false" />
+          <Property Name="IdDia" Type="int" Nullable="false" />
+          <Property Name="HoraDesde" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HoraHasta" Type="varchar" MaxLength="50" />
+          <Property Name="IdHorario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ObrasSociales">
+          <Key>
+            <PropertyRef Name="IdObraSocial" />
+          </Key>
+          <Property Name="IdObraSocial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="IdPaciente" />
+          </Key>
+          <Property Name="IdPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="DNI" Type="bigint" />
+          <Property Name="Direccion" Type="varchar" MaxLength="150" />
+          <Property Name="TelefonoParticular" Type="varchar" MaxLength="100" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="Edad" Type="int" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="ImageData" Type="varchar(max)" />
+          <Property Name="IdObraSocial" Type="int" />
+          <Property Name="IdPlan" Type="int" />
+          <Property Name="NroAfiliado" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ProfesionalCentroMedico">
+          <Key>
+            <PropertyRef Name="IdProfesional" />
+            <PropertyRef Name="IdCentroMedico" />
+          </Key>
+          <Property Name="IdProfesional" Type="int" Nullable="false" />
+          <Property Name="IdCentroMedico" Type="int" Nullable="false" />
+          <Property Name="DiasAtencion" Type="varchar" MaxLength="100" />
+          <Property Name="MaxHoraDesde" Type="int" />
+          <Property Name="MaxHoraHasta" Type="int" />
+          <Property Name="DuracionTurno" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Profesionales">
+          <Key>
+            <PropertyRef Name="IdProfesional" />
+          </Key>
+          <Property Name="IdProfesional" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+          <Property Name="Apellido" Type="varchar" MaxLength="200" />
+          <Property Name="Cuit" Type="char" MaxLength="11" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="IdEspecialidad" Type="int" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="TelefonoParticular" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="ImageData" Type="varchar(max)" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="100" />
+          <Property Name="Observaciones" Type="text" />
+          <Property Name="MNacional" Type="varchar" MaxLength="100" />
+          <Property Name="MProvincial" Type="varchar" MaxLength="100" />
+          <Property Name="CBU" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Turnos">
+          <Key>
+            <PropertyRef Name="IdTurno" />
+          </Key>
+          <Property Name="IdTurno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProfesional" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="300" />
+          <Property Name="FechaDesde" Type="datetime" />
+          <Property Name="FechaHasta" Type="datetime" />
+          <Property Name="Color" Type="varchar" MaxLength="10" />
+          <Property Name="IdPaciente" Type="int" Nullable="false" />
+          <Property Name="IdCentroMedico" Type="int" Nullable="false" />
+          <Property Name="TodoEldia" Type="bit" />
+        </EntityType>
+        <Association Name="FK_HorariosProfesional_Dias">
+          <End Role="Dias" Type="Self.Dias" Multiplicity="1" />
+          <End Role="HorariosProfesional" Type="Self.HorariosProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dias">
+              <PropertyRef Name="IdDia" />
+            </Principal>
+            <Dependent Role="HorariosProfesional">
+              <PropertyRef Name="IdDia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosProfesional_Profesionales">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="HorariosProfesional" Type="Self.HorariosProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="IdProfesional" />
+            </Principal>
+            <Dependent Role="HorariosProfesional">
+              <PropertyRef Name="IdProfesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pacientes_ObrasSociales">
+          <End Role="ObrasSociales" Type="Self.ObrasSociales" Multiplicity="0..1" />
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObrasSociales">
+              <PropertyRef Name="IdObraSocial" />
+            </Principal>
+            <Dependent Role="Pacientes">
+              <PropertyRef Name="IdObraSocial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesionalCentroMedico_CentroMedico">
+          <End Role="CentroMedico" Type="Self.CentroMedico" Multiplicity="1" />
+          <End Role="HorariosProfesional" Type="Self.HorariosProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Principal>
+            <Dependent Role="HorariosProfesional">
+              <PropertyRef Name="IdCentroMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesionalCentroMedico_CentroMedico1">
+          <End Role="CentroMedico" Type="Self.CentroMedico" Multiplicity="1" />
+          <End Role="ProfesionalCentroMedico" Type="Self.ProfesionalCentroMedico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Principal>
+            <Dependent Role="ProfesionalCentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesionalCentroMedico_Profesionales1">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="ProfesionalCentroMedico" Type="Self.ProfesionalCentroMedico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="IdProfesional" />
+            </Principal>
+            <Dependent Role="ProfesionalCentroMedico">
+              <PropertyRef Name="IdProfesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profesionales_Especialidades">
+          <End Role="Especialidades" Type="Self.Especialidades" Multiplicity="0..1" />
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidades">
+              <PropertyRef Name="IdEspecialidad" />
+            </Principal>
+            <Dependent Role="Profesionales">
+              <PropertyRef Name="IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_CentroMedico">
+          <End Role="CentroMedico" Type="Self.CentroMedico" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdCentroMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Pacientes">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="IdPaciente" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Profesionales">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="IdProfesional" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdProfesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="pa_DeleteHorariosDoctor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProfesional" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_DeleteProfesionalCentroMedico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProfesional" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PwaModelStoreContainer">
+          <EntitySet Name="CentroMedico" EntityType="Self.CentroMedico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dias" EntityType="Self.Dias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Especialidades" EntityType="Self.Especialidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorariosProfesional" EntityType="Self.HorariosProfesional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObrasSociales" EntityType="Self.ObrasSociales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfesionalCentroMedico" EntityType="Self.ProfesionalCentroMedico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesionales" EntityType="Self.Profesionales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turnos" EntityType="Self.Turnos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HorariosProfesional_Dias" Association="Self.FK_HorariosProfesional_Dias">
+            <End Role="Dias" EntitySet="Dias" />
+            <End Role="HorariosProfesional" EntitySet="HorariosProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosProfesional_Profesionales" Association="Self.FK_HorariosProfesional_Profesionales">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="HorariosProfesional" EntitySet="HorariosProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pacientes_ObrasSociales" Association="Self.FK_Pacientes_ObrasSociales">
+            <End Role="ObrasSociales" EntitySet="ObrasSociales" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesionalCentroMedico_CentroMedico" Association="Self.FK_ProfesionalCentroMedico_CentroMedico">
+            <End Role="CentroMedico" EntitySet="CentroMedico" />
+            <End Role="HorariosProfesional" EntitySet="HorariosProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesionalCentroMedico_CentroMedico1" Association="Self.FK_ProfesionalCentroMedico_CentroMedico1">
+            <End Role="CentroMedico" EntitySet="CentroMedico" />
+            <End Role="ProfesionalCentroMedico" EntitySet="ProfesionalCentroMedico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesionalCentroMedico_Profesionales1" Association="Self.FK_ProfesionalCentroMedico_Profesionales1">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="ProfesionalCentroMedico" EntitySet="ProfesionalCentroMedico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profesionales_Especialidades" Association="Self.FK_Profesionales_Especialidades">
+            <End Role="Especialidades" EntitySet="Especialidades" />
+            <End Role="Profesionales" EntitySet="Profesionales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_CentroMedico" Association="Self.FK_Turnos_CentroMedico">
+            <End Role="CentroMedico" EntitySet="CentroMedico" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Pacientes" Association="Self.FK_Turnos_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Profesionales" Association="Self.FK_Turnos_Profesionales">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PwaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CentroMedico">
+          <Key>
+            <PropertyRef Name="IdCentroMedico" />
+          </Key>
+          <Property Name="IdCentroMedico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCentro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HorariosProfesional" Relationship="Self.FK_ProfesionalCentroMedico_CentroMedico" FromRole="CentroMedico" ToRole="HorariosProfesional" />
+          <NavigationProperty Name="ProfesionalCentroMedico" Relationship="Self.FK_ProfesionalCentroMedico_CentroMedico1" FromRole="CentroMedico" ToRole="ProfesionalCentroMedico" />
+          <NavigationProperty Name="Turnos" Relationship="Self.FK_Turnos_CentroMedico" FromRole="CentroMedico" ToRole="Turnos" />
+        </EntityType>
+        <EntityType Name="Dias">
+          <Key>
+            <PropertyRef Name="IdDia" />
+          </Key>
+          <Property Name="IdDia" Type="Int32" Nullable="false" />
+          <Property Name="Dia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HorariosProfesional" Relationship="Self.FK_HorariosProfesional_Dias" FromRole="Dias" ToRole="HorariosProfesional" />
+        </EntityType>
+        <EntityType Name="Especialidades">
+          <Key>
+            <PropertyRef Name="IdEspecialidad" />
+          </Key>
+          <Property Name="IdEspecialidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrpcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profesionales" Relationship="Self.FK_Profesionales_Especialidades" FromRole="Especialidades" ToRole="Profesionales" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsFullDay" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="HorariosProfesional">
+          <Key>
+            <PropertyRef Name="IdProfesional" />
+            <PropertyRef Name="IdCentroMedico" />
+            <PropertyRef Name="IdDia" />
+            <PropertyRef Name="HoraDesde" />
+          </Key>
+          <Property Name="IdProfesional" Type="Int32" Nullable="false" />
+          <Property Name="IdCentroMedico" Type="Int32" Nullable="false" />
+          <Property Name="IdDia" Type="Int32" Nullable="false" />
+          <Property Name="HoraDesde" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoraHasta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdHorario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CentroMedico" Relationship="Self.FK_ProfesionalCentroMedico_CentroMedico" FromRole="HorariosProfesional" ToRole="CentroMedico" />
+          <NavigationProperty Name="Dias" Relationship="Self.FK_HorariosProfesional_Dias" FromRole="HorariosProfesional" ToRole="Dias" />
+          <NavigationProperty Name="Profesionales" Relationship="Self.FK_HorariosProfesional_Profesionales" FromRole="HorariosProfesional" ToRole="Profesionales" />
+        </EntityType>
+        <EntityType Name="ObrasSociales">
+          <Key>
+            <PropertyRef Name="IdObraSocial" />
+          </Key>
+          <Property Name="IdObraSocial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Pacientes_ObrasSociales" FromRole="ObrasSociales" ToRole="Pacientes" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="IdPaciente" />
+          </Key>
+          <Property Name="IdPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="Int64" />
+          <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoParticular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Edad" Type="Int32" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdObraSocial" Type="Int32" />
+          <Property Name="IdPlan" Type="Int32" />
+          <Property Name="NroAfiliado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ObrasSociales" Relationship="Self.FK_Pacientes_ObrasSociales" FromRole="Pacientes" ToRole="ObrasSociales" />
+          <NavigationProperty Name="Turnos" Relationship="Self.FK_Turnos_Pacientes" FromRole="Pacientes" ToRole="Turnos" />
+        </EntityType>
+        <EntityType Name="ProfesionalCentroMedico">
+          <Key>
+            <PropertyRef Name="IdProfesional" />
+            <PropertyRef Name="IdCentroMedico" />
+          </Key>
+          <Property Name="IdProfesional" Type="Int32" Nullable="false" />
+          <Property Name="IdCentroMedico" Type="Int32" Nullable="false" />
+          <Property Name="DiasAtencion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaxHoraDesde" Type="Int32" />
+          <Property Name="MaxHoraHasta" Type="Int32" />
+          <Property Name="DuracionTurno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CentroMedico" Relationship="Self.FK_ProfesionalCentroMedico_CentroMedico1" FromRole="ProfesionalCentroMedico" ToRole="CentroMedico" />
+          <NavigationProperty Name="Profesionales" Relationship="Self.FK_ProfesionalCentroMedico_Profesionales1" FromRole="ProfesionalCentroMedico" ToRole="Profesionales" />
+        </EntityType>
+        <EntityType Name="Profesionales">
+          <Key>
+            <PropertyRef Name="IdProfesional" />
+          </Key>
+          <Property Name="IdProfesional" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cuit" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEspecialidad" Type="Int32" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TelefonoParticular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImageData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MNacional" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MProvincial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CBU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Especialidades" Relationship="Self.FK_Profesionales_Especialidades" FromRole="Profesionales" ToRole="Especialidades" />
+          <NavigationProperty Name="HorariosProfesional" Relationship="Self.FK_HorariosProfesional_Profesionales" FromRole="Profesionales" ToRole="HorariosProfesional" />
+          <NavigationProperty Name="ProfesionalCentroMedico" Relationship="Self.FK_ProfesionalCentroMedico_Profesionales1" FromRole="Profesionales" ToRole="ProfesionalCentroMedico" />
+          <NavigationProperty Name="Turnos" Relationship="Self.FK_Turnos_Profesionales" FromRole="Profesionales" ToRole="Turnos" />
+        </EntityType>
+        <EntityType Name="Turnos">
+          <Key>
+            <PropertyRef Name="IdTurno" />
+          </Key>
+          <Property Name="IdTurno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProfesional" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDesde" Type="DateTime" Precision="3" />
+          <Property Name="FechaHasta" Type="DateTime" Precision="3" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdPaciente" Type="Int32" Nullable="false" />
+          <Property Name="IdCentroMedico" Type="Int32" Nullable="false" />
+          <Property Name="TodoEldia" Type="Boolean" />
+          <NavigationProperty Name="CentroMedico" Relationship="Self.FK_Turnos_CentroMedico" FromRole="Turnos" ToRole="CentroMedico" />
+          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Turnos_Pacientes" FromRole="Turnos" ToRole="Pacientes" />
+          <NavigationProperty Name="Profesionales" Relationship="Self.FK_Turnos_Profesionales" FromRole="Turnos" ToRole="Profesionales" />
+        </EntityType>
+        <Association Name="FK_ProfesionalCentroMedico_CentroMedico">
+          <End Role="CentroMedico" Type="Self.CentroMedico" Multiplicity="1" />
+          <End Role="HorariosProfesional" Type="Self.HorariosProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Principal>
+            <Dependent Role="HorariosProfesional">
+              <PropertyRef Name="IdCentroMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesionalCentroMedico_CentroMedico1">
+          <End Role="CentroMedico" Type="Self.CentroMedico" Multiplicity="1" />
+          <End Role="ProfesionalCentroMedico" Type="Self.ProfesionalCentroMedico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Principal>
+            <Dependent Role="ProfesionalCentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_CentroMedico">
+          <End Role="CentroMedico" Type="Self.CentroMedico" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroMedico">
+              <PropertyRef Name="IdCentroMedico" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdCentroMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosProfesional_Dias">
+          <End Role="Dias" Type="Self.Dias" Multiplicity="1" />
+          <End Role="HorariosProfesional" Type="Self.HorariosProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dias">
+              <PropertyRef Name="IdDia" />
+            </Principal>
+            <Dependent Role="HorariosProfesional">
+              <PropertyRef Name="IdDia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profesionales_Especialidades">
+          <End Role="Especialidades" Type="Self.Especialidades" Multiplicity="0..1" />
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidades">
+              <PropertyRef Name="IdEspecialidad" />
+            </Principal>
+            <Dependent Role="Profesionales">
+              <PropertyRef Name="IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HorariosProfesional_Profesionales">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="HorariosProfesional" Type="Self.HorariosProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="IdProfesional" />
+            </Principal>
+            <Dependent Role="HorariosProfesional">
+              <PropertyRef Name="IdProfesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pacientes_ObrasSociales">
+          <End Role="ObrasSociales" Type="Self.ObrasSociales" Multiplicity="0..1" />
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObrasSociales">
+              <PropertyRef Name="IdObraSocial" />
+            </Principal>
+            <Dependent Role="Pacientes">
+              <PropertyRef Name="IdObraSocial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Pacientes">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="IdPaciente" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesionalCentroMedico_Profesionales1">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="ProfesionalCentroMedico" Type="Self.ProfesionalCentroMedico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="IdProfesional" />
+            </Principal>
+            <Dependent Role="ProfesionalCentroMedico">
+              <PropertyRef Name="IdProfesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Profesionales">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="IdProfesional" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdProfesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PwaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CentroMedico" EntityType="Self.CentroMedico" />
+          <EntitySet Name="Dias" EntityType="Self.Dias" />
+          <EntitySet Name="Especialidades" EntityType="Self.Especialidades" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="HorariosProfesional" EntityType="Self.HorariosProfesional" />
+          <EntitySet Name="ObrasSociales" EntityType="Self.ObrasSociales" />
+          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" />
+          <EntitySet Name="ProfesionalCentroMedico" EntityType="Self.ProfesionalCentroMedico" />
+          <EntitySet Name="Profesionales" EntityType="Self.Profesionales" />
+          <EntitySet Name="Turnos" EntityType="Self.Turnos" />
+          <AssociationSet Name="FK_ProfesionalCentroMedico_CentroMedico" Association="Self.FK_ProfesionalCentroMedico_CentroMedico">
+            <End Role="CentroMedico" EntitySet="CentroMedico" />
+            <End Role="HorariosProfesional" EntitySet="HorariosProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesionalCentroMedico_CentroMedico1" Association="Self.FK_ProfesionalCentroMedico_CentroMedico1">
+            <End Role="CentroMedico" EntitySet="CentroMedico" />
+            <End Role="ProfesionalCentroMedico" EntitySet="ProfesionalCentroMedico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_CentroMedico" Association="Self.FK_Turnos_CentroMedico">
+            <End Role="CentroMedico" EntitySet="CentroMedico" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosProfesional_Dias" Association="Self.FK_HorariosProfesional_Dias">
+            <End Role="Dias" EntitySet="Dias" />
+            <End Role="HorariosProfesional" EntitySet="HorariosProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profesionales_Especialidades" Association="Self.FK_Profesionales_Especialidades">
+            <End Role="Especialidades" EntitySet="Especialidades" />
+            <End Role="Profesionales" EntitySet="Profesionales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HorariosProfesional_Profesionales" Association="Self.FK_HorariosProfesional_Profesionales">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="HorariosProfesional" EntitySet="HorariosProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pacientes_ObrasSociales" Association="Self.FK_Pacientes_ObrasSociales">
+            <End Role="ObrasSociales" EntitySet="ObrasSociales" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Pacientes" Association="Self.FK_Turnos_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesionalCentroMedico_Profesionales1" Association="Self.FK_ProfesionalCentroMedico_Profesionales1">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="ProfesionalCentroMedico" EntitySet="ProfesionalCentroMedico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Profesionales" Association="Self.FK_Turnos_Profesionales">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <FunctionImport Name="pa_DeleteHorariosDoctor">
+            <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_DeleteProfesionalCentroMedico">
+            <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PwaModelStoreContainer" CdmEntityContainer="PwaEntities">
+          <EntitySetMapping Name="CentroMedico">
+            <EntityTypeMapping TypeName="PwaModel.CentroMedico">
+              <MappingFragment StoreEntitySet="CentroMedico">
+                <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+                <ScalarProperty Name="NombreCentro" ColumnName="NombreCentro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dias">
+            <EntityTypeMapping TypeName="PwaModel.Dias">
+              <MappingFragment StoreEntitySet="Dias">
+                <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidades">
+            <EntityTypeMapping TypeName="PwaModel.Especialidades">
+              <MappingFragment StoreEntitySet="Especialidades">
+                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+                <ScalarProperty Name="Descrpcion" ColumnName="Descrpcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="PwaModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HorariosProfesional">
+            <EntityTypeMapping TypeName="PwaModel.HorariosProfesional">
+              <MappingFragment StoreEntitySet="HorariosProfesional">
+                <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+                <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+                <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+                <ScalarProperty Name="HoraDesde" ColumnName="HoraDesde" />
+                <ScalarProperty Name="HoraHasta" ColumnName="HoraHasta" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObrasSociales">
+            <EntityTypeMapping TypeName="PwaModel.ObrasSociales">
+              <MappingFragment StoreEntitySet="ObrasSociales">
+                <ScalarProperty Name="IdObraSocial" ColumnName="IdObraSocial" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="PwaModel.Pacientes">
+              <MappingFragment StoreEntitySet="Pacientes">
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="TelefonoParticular" ColumnName="TelefonoParticular" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="IdObraSocial" ColumnName="IdObraSocial" />
+                <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+                <ScalarProperty Name="NroAfiliado" ColumnName="NroAfiliado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfesionalCentroMedico">
+            <EntityTypeMapping TypeName="PwaModel.ProfesionalCentroMedico">
+              <MappingFragment StoreEntitySet="ProfesionalCentroMedico">
+                <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+                <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+                <ScalarProperty Name="DiasAtencion" ColumnName="DiasAtencion" />
+                <ScalarProperty Name="MaxHoraDesde" ColumnName="MaxHoraDesde" />
+                <ScalarProperty Name="MaxHoraHasta" ColumnName="MaxHoraHasta" />
+                <ScalarProperty Name="DuracionTurno" ColumnName="DuracionTurno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesionales">
+            <EntityTypeMapping TypeName="PwaModel.Profesionales">
+              <MappingFragment StoreEntitySet="Profesionales">
+                <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="TelefonoParticular" ColumnName="TelefonoParticular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="MNacional" ColumnName="MNacional" />
+                <ScalarProperty Name="MProvincial" ColumnName="MProvincial" />
+                <ScalarProperty Name="CBU" ColumnName="CBU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turnos">
+            <EntityTypeMapping TypeName="PwaModel.Turnos">
+              <MappingFragment StoreEntitySet="Turnos">
+                <ScalarProperty Name="IdTurno" ColumnName="IdTurno" />
+                <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+                <ScalarProperty Name="TodoEldia" ColumnName="TodoEldia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_DeleteHorariosDoctor" FunctionName="PwaModel.Store.pa_DeleteHorariosDoctor" />
+          <FunctionImportMapping FunctionImportName="pa_DeleteProfesionalCentroMedico" FunctionName="PwaModel.Store.pa_DeleteProfesionalCentroMedico" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

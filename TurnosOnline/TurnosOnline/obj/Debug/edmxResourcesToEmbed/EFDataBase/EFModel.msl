@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PwaModelStoreContainer" CdmEntityContainer="PwaEntities">
+    <EntitySetMapping Name="CentroMedico">
+      <EntityTypeMapping TypeName="PwaModel.CentroMedico">
+        <MappingFragment StoreEntitySet="CentroMedico">
+          <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+          <ScalarProperty Name="NombreCentro" ColumnName="NombreCentro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dias">
+      <EntityTypeMapping TypeName="PwaModel.Dias">
+        <MappingFragment StoreEntitySet="Dias">
+          <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+          <ScalarProperty Name="Dia" ColumnName="Dia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Especialidades">
+      <EntityTypeMapping TypeName="PwaModel.Especialidades">
+        <MappingFragment StoreEntitySet="Especialidades">
+          <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+          <ScalarProperty Name="Descrpcion" ColumnName="Descrpcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="PwaModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HorariosProfesional">
+      <EntityTypeMapping TypeName="PwaModel.HorariosProfesional">
+        <MappingFragment StoreEntitySet="HorariosProfesional">
+          <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+          <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+          <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+          <ScalarProperty Name="HoraDesde" ColumnName="HoraDesde" />
+          <ScalarProperty Name="HoraHasta" ColumnName="HoraHasta" />
+          <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObrasSociales">
+      <EntityTypeMapping TypeName="PwaModel.ObrasSociales">
+        <MappingFragment StoreEntitySet="ObrasSociales">
+          <ScalarProperty Name="IdObraSocial" ColumnName="IdObraSocial" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacientes">
+      <EntityTypeMapping TypeName="PwaModel.Pacientes">
+        <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="TelefonoParticular" ColumnName="TelefonoParticular" />
+          <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="IdObraSocial" ColumnName="IdObraSocial" />
+          <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+          <ScalarProperty Name="NroAfiliado" ColumnName="NroAfiliado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfesionalCentroMedico">
+      <EntityTypeMapping TypeName="PwaModel.ProfesionalCentroMedico">
+        <MappingFragment StoreEntitySet="ProfesionalCentroMedico">
+          <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+          <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+          <ScalarProperty Name="DiasAtencion" ColumnName="DiasAtencion" />
+          <ScalarProperty Name="MaxHoraDesde" ColumnName="MaxHoraDesde" />
+          <ScalarProperty Name="MaxHoraHasta" ColumnName="MaxHoraHasta" />
+          <ScalarProperty Name="DuracionTurno" ColumnName="DuracionTurno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesionales">
+      <EntityTypeMapping TypeName="PwaModel.Profesionales">
+        <MappingFragment StoreEntitySet="Profesionales">
+          <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="TelefonoParticular" ColumnName="TelefonoParticular" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="MNacional" ColumnName="MNacional" />
+          <ScalarProperty Name="MProvincial" ColumnName="MProvincial" />
+          <ScalarProperty Name="CBU" ColumnName="CBU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Turnos">
+      <EntityTypeMapping TypeName="PwaModel.Turnos">
+        <MappingFragment StoreEntitySet="Turnos">
+          <ScalarProperty Name="IdTurno" ColumnName="IdTurno" />
+          <ScalarProperty Name="IdProfesional" ColumnName="IdProfesional" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+          <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="IdCentroMedico" ColumnName="IdCentroMedico" />
+          <ScalarProperty Name="TodoEldia" ColumnName="TodoEldia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="pa_DeleteHorariosDoctor" FunctionName="PwaModel.Store.pa_DeleteHorariosDoctor" />
+    <FunctionImportMapping FunctionImportName="pa_DeleteProfesionalCentroMedico" FunctionName="PwaModel.Store.pa_DeleteProfesionalCentroMedico" />
+  </EntityContainerMapping>
+</Mapping>
