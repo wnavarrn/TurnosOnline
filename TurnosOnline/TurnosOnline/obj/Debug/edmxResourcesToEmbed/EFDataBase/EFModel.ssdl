@@ -33,6 +33,20 @@
     <Property Name="ThemeColor" Type="varchar" MaxLength="10" />
     <Property Name="IsFullDay" Type="bit" />
   </EntityType>
+  <EntityType Name="FiltroTurnos">
+    <Key>
+      <PropertyRef Name="IdFiltroHorario" />
+    </Key>
+    <Property Name="IdFiltroHorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Horarios">
+    <Key>
+      <PropertyRef Name="IdHorarios" />
+    </Key>
+    <Property Name="IdHorarios" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Horario" Type="time" Precision="7" />
+  </EntityType>
   <EntityType Name="HorariosProfesional">
     <Key>
       <PropertyRef Name="IdProfesional" />
@@ -46,6 +60,13 @@
     <Property Name="HoraDesde" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="HoraHasta" Type="varchar" MaxLength="50" />
     <Property Name="IdHorario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meses">
+    <Key>
+      <PropertyRef Name="IdMes" />
+    </Key>
+    <Property Name="IdMes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Decripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="ObrasSociales">
     <Key>
@@ -252,7 +273,10 @@
     <EntitySet Name="Dias" EntityType="Self.Dias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Especialidades" EntityType="Self.Especialidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FiltroTurnos" EntityType="Self.FiltroTurnos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HorariosProfesional" EntityType="Self.HorariosProfesional" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Meses" EntityType="Self.Meses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ObrasSociales" EntityType="Self.ObrasSociales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfesionalCentroMedico" EntityType="Self.ProfesionalCentroMedico" Schema="dbo" store:Type="Tables" />

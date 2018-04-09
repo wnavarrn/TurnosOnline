@@ -4,9 +4,42 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
+@*<h2>@ViewBag.Title.</h2>*@
+
+<div class="header-row" id="header-row" style="padding: 0px; overflow:hidden;">
+    <!-- container-fluid is the same as container but spans a wider viewport,
+    it still has padding though so you need to remove this either by adding
+    another class with no padding or inline as I did below -->
+    <div class="container-fluid" style="padding: 0px;">
+        <div class="row">
+            <!-- You originally has it set up for two columns, remove the second
+            column as it is unneeded and set the first to always span all 12 columns
+            even when at its smallest (xs). Set the overflow to hidden so no matter
+            the height of your image it will never show outside this div-->
+            <div class="col-xs-12">
+                <a class="navbar-brand logo" href="index.html">
+                    <!-- place your image here -->
+                    <img src="~/Assets/images/bannerCMLH.jpg" alt="company logo" width: 1080>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
+
+        <p>
+            Usted podrá solicitar turnos online para Consultas Médicas y Estudios de nuestros centros (Belgrano, Ramos Mejía, Rivadavia, Morón, Espora, Monteagudo y Cardiovascular).
+        </p>
+        <p>
+            Si aún no tiene CLAVE por favor REGISTRESE y aguarde a recibir el email de confirmación que le permitira generar una clave.
+        </p>
+        <button class="btn btn-primary mt-lg hidden-sm hidden-xs" id="linkRegister">Registrarme</button>
+
+     
+    </div>
+    <div class="col-md-6">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -41,20 +74,38 @@
                         <input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+                <div class="d-none d-md-none">
                     <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>
+                </div>
+               
+                //Enable this once you have account confirmation enabled for password reset functionality
+                <p>
+                    @Html.ActionLink("¿Olvidó su contraseña?", "ForgotPassword")
+                </p>
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+</div>
+
+<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ingrese su DNI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" placeholder="Ingrese su número de DNI" />
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                <button type="button" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
     </div>
 </div>
 

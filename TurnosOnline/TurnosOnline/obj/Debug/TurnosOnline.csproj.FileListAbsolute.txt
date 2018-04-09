@@ -80,3 +80,4 @@ C:\Desarrollos\Freelance\NET\TurnosOnline\TurnosOnline\TurnosOnline\bin\Microsof
 C:\Desarrollos\Freelance\NET\TurnosOnline\TurnosOnline\TurnosOnline\obj\Debug\TurnosOnline.csprojResolveAssemblyReference.cache
 C:\Desarrollos\Freelance\NET\TurnosOnline\TurnosOnline\TurnosOnline\obj\Debug\TurnosOnline.dll
 C:\Desarrollos\Freelance\NET\TurnosOnline\TurnosOnline\TurnosOnline\obj\Debug\TurnosOnline.pdb
+C:\Desarrollos\Freelance\NET\TurnosOnline\TurnosOnline\TurnosOnline\bin\Ninject.dll

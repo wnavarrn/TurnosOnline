@@ -25,6 +25,9 @@
         <AssociationConnector Association="PwaModel.FK_Turnos_Pacientes" ManuallyRouted="false" />
         <AssociationConnector Association="PwaModel.FK_ProfesionalCentroMedico_Profesionales1" ManuallyRouted="false" />
         <AssociationConnector Association="PwaModel.FK_Turnos_Profesionales" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PwaModel.FiltroTurnos" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PwaModel.Horarios" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PwaModel.Meses" Width="1.5" PointX="9.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

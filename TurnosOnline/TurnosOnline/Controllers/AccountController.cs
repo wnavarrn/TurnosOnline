@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TurnosOnline.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace TurnosOnline.Controllers
 {
@@ -205,13 +207,56 @@ namespace TurnosOnline.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
+
+                    string GmailHost = "smtp.gmail.com";
+                    int GmailPort = 587; // Gmail can use ports 25, 465 & 587; but must be 25 for medium trust environment.
+                    bool GmailSSL = true;
+
+                    string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                    
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = GmailHost;
+                    smtp.Port = GmailPort;
+                    smtp.EnableSsl = GmailSSL;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential("wnavarrn88@gmail.com", "wnavarrn@209");
+
+
+                    using (var message = new MailMessage("wnavarrn88@gmail.com", "walter.navarrete@outlook.com"))
+                    {
+                        message.Subject = "Subject";
+                        message.Body = callbackUrl;
+                        message.IsBodyHtml = true;
+                        smtp.Send(message);
+                    }
+
+                    //var mailMsg = new MailMessage();
+                    //mailMsg.Subject = "probando";
+                    //mailMsg.Body = "body";
+                    //mailMsg.To.Add("navarrwal@gmail.com");
+
+                    //var smtp = new SmtpClient();
+                    //smtp.Send(mailMsg);
+
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+                //var mailMsg = new MailMessage();
+                //mailMsg.Subject = "probando";
+                //mailMsg.Body = "body";
+                //mailMsg.To.Add("navarrwal@gmail.com");
+
+                //var smtp = new SmtpClient();
+                //smtp.Send(mailMsg);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");

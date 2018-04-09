@@ -318,5 +318,29 @@
     <FunctionImport Name="pa_DeleteProfesionalCentroMedico">
       <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="FiltroTurnos" EntityType="PwaModel.FiltroTurnos" />
+    <EntitySet Name="Horarios" EntityType="PwaModel.Horarios" />
+    <EntitySet Name="Meses" EntityType="PwaModel.Meses" />
   </EntityContainer>
+  <EntityType Name="FiltroTurnos">
+    <Key>
+      <PropertyRef Name="IdFiltroHorario" />
+    </Key>
+    <Property Name="IdFiltroHorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Horarios">
+    <Key>
+      <PropertyRef Name="IdHorarios" />
+    </Key>
+    <Property Name="IdHorarios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Horario" Type="Time" Precision="7" />
+  </EntityType>
+  <EntityType Name="Meses">
+    <Key>
+      <PropertyRef Name="IdMes" />
+    </Key>
+    <Property Name="IdMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Decripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

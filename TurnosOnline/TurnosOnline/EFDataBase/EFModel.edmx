@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PwaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PwaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CentroMedico">
           <Key>
             <PropertyRef Name="IdCentroMedico" />
@@ -38,6 +38,20 @@
           <Property Name="ThemeColor" Type="varchar" MaxLength="10" />
           <Property Name="IsFullDay" Type="bit" />
         </EntityType>
+        <EntityType Name="FiltroTurnos">
+          <Key>
+            <PropertyRef Name="IdFiltroHorario" />
+          </Key>
+          <Property Name="IdFiltroHorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="IdHorarios" />
+          </Key>
+          <Property Name="IdHorarios" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Horario" Type="time" Precision="7" />
+        </EntityType>
         <EntityType Name="HorariosProfesional">
           <Key>
             <PropertyRef Name="IdProfesional" />
@@ -51,6 +65,13 @@
           <Property Name="HoraDesde" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="HoraHasta" Type="varchar" MaxLength="50" />
           <Property Name="IdHorario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meses">
+          <Key>
+            <PropertyRef Name="IdMes" />
+          </Key>
+          <Property Name="IdMes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Decripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ObrasSociales">
           <Key>
@@ -257,7 +278,10 @@
           <EntitySet Name="Dias" EntityType="Self.Dias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especialidades" EntityType="Self.Especialidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FiltroTurnos" EntityType="Self.FiltroTurnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HorariosProfesional" EntityType="Self.HorariosProfesional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meses" EntityType="Self.Meses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ObrasSociales" EntityType="Self.ObrasSociales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfesionalCentroMedico" EntityType="Self.ProfesionalCentroMedico" Schema="dbo" store:Type="Tables" />
@@ -304,8 +328,7 @@
             <End Role="Turnos" EntitySet="Turnos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PwaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -622,12 +645,36 @@
             <End Role="Turnos" EntitySet="Turnos" />
           </AssociationSet>
           <FunctionImport Name="pa_DeleteHorariosDoctor">
-            <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
+          <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_DeleteProfesionalCentroMedico">
-            <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
+          <Parameter Name="IdProfesional" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="FiltroTurnos" EntityType="PwaModel.FiltroTurnos" />
+          <EntitySet Name="Horarios" EntityType="PwaModel.Horarios" />
+          <EntitySet Name="Meses" EntityType="PwaModel.Meses" />
         </EntityContainer>
+        <EntityType Name="FiltroTurnos">
+          <Key>
+            <PropertyRef Name="IdFiltroHorario" />
+          </Key>
+          <Property Name="IdFiltroHorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="IdHorarios" />
+          </Key>
+          <Property Name="IdHorarios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Horario" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Meses">
+          <Key>
+            <PropertyRef Name="IdMes" />
+          </Key>
+          <Property Name="IdMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Decripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -763,6 +810,30 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pa_DeleteHorariosDoctor" FunctionName="PwaModel.Store.pa_DeleteHorariosDoctor" />
           <FunctionImportMapping FunctionImportName="pa_DeleteProfesionalCentroMedico" FunctionName="PwaModel.Store.pa_DeleteProfesionalCentroMedico" />
+          <EntitySetMapping Name="FiltroTurnos">
+            <EntityTypeMapping TypeName="PwaModel.FiltroTurnos">
+              <MappingFragment StoreEntitySet="FiltroTurnos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdFiltroHorario" ColumnName="IdFiltroHorario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="PwaModel.Horarios">
+              <MappingFragment StoreEntitySet="Horarios">
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="IdHorarios" ColumnName="IdHorarios" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meses">
+            <EntityTypeMapping TypeName="PwaModel.Meses">
+              <MappingFragment StoreEntitySet="Meses">
+                <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+                <ScalarProperty Name="IdMes" ColumnName="IdMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

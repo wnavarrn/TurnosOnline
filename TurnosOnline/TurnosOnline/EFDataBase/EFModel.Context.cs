@@ -37,6 +37,9 @@ namespace TurnosOnline.EFDataBase
         public virtual DbSet<ProfesionalCentroMedico> ProfesionalCentroMedico { get; set; }
         public virtual DbSet<Profesionales> Profesionales { get; set; }
         public virtual DbSet<Turnos> Turnos { get; set; }
+        public virtual DbSet<FiltroTurnos> FiltroTurnos { get; set; }
+        public virtual DbSet<Horarios> Horarios { get; set; }
+        public virtual DbSet<Meses> Meses { get; set; }
     
         public virtual int pa_DeleteHorariosDoctor(Nullable<int> idProfesional)
         {

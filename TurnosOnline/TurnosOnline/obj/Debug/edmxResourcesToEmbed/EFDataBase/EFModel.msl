@@ -130,5 +130,29 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="pa_DeleteHorariosDoctor" FunctionName="PwaModel.Store.pa_DeleteHorariosDoctor" />
     <FunctionImportMapping FunctionImportName="pa_DeleteProfesionalCentroMedico" FunctionName="PwaModel.Store.pa_DeleteProfesionalCentroMedico" />
+    <EntitySetMapping Name="FiltroTurnos">
+      <EntityTypeMapping TypeName="PwaModel.FiltroTurnos">
+        <MappingFragment StoreEntitySet="FiltroTurnos">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdFiltroHorario" ColumnName="IdFiltroHorario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horarios">
+      <EntityTypeMapping TypeName="PwaModel.Horarios">
+        <MappingFragment StoreEntitySet="Horarios">
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="IdHorarios" ColumnName="IdHorarios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meses">
+      <EntityTypeMapping TypeName="PwaModel.Meses">
+        <MappingFragment StoreEntitySet="Meses">
+          <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+          <ScalarProperty Name="IdMes" ColumnName="IdMes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

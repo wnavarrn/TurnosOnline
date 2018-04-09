@@ -26,5 +26,24 @@ namespace TurnosOnline.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public JsonResult GetPaciente(string dni)
+        {
+            //Voy ala base de datos a consultar si el paciente existe registrado.
+            //Le mando un mail para que cree su password y contraseña o se la hago generar ahi.(ver);
+
+            bool esPaciente = false;
+
+            return Json(new
+            {
+                
+                Success = true,
+                EsPaciente = esPaciente,
+            }, JsonRequestBehavior.AllowGet);
+
+
+
+        }
     }
 }

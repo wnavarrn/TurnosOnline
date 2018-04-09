@@ -40,44 +40,7 @@
     <script type="text/javascript">
 
 
-        //desahabilita los botones del navegador
-        function initControls() {
-            window.location.hash = "no-back-button";
-            window.location.hash = "Again-No-back-button" //chrome
-            window.onhashchange = function () { window.location.hash = "no-back-button"; }
-        }
-
-        //session end
-        var sessionTimeoutWarning = @Session.Timeout +1;
-        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
-        setInterval('SessionEnd()', sTimeout);
-
-        function SessionEnd() {
-            $.ajax({
-                url: "../Base/IsSessionTimedOut",
-                type: 'POST',
-                data: {},
-                dataType: "text json",
-                cache: false,
-                success: function (result) {
-                    if (result.Success) {
-                        window.location = "/Account/LogOff";
-                    }
-                    else {
-
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    window.location = "/Account/LogOff";
-                }
-            });
-        }
-
         $(document).ready(function () {
-
-
-
-            initControls();
 
             $(document).ajaxStart(function () {
                 $.LoadingOverlay("show", {

@@ -1,0 +1,81 @@
+﻿@model TurnosOnline.Models.MedicoViewModels
+@{
+    ViewBag.Title = "Turnos";
+    Layout = "~/Views/Shared/_Layout_Index.cshtml";
+}
+
+
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "frmIndex", @class = "", enctype = "multipart/form-data" }))
+{
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Turnos</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <div class="alert alert-success"> Para solicitar un turno para consulta médica, seleccione una Especialidad, luego seleccione un Médico y haga clic en Realizar Búsqueda. Esta última opción le brindará un listado de turnos disponibles en el cual Usted podrá seleccionar haciendo clic sobre la fila. Para ver sus turnos asignados, confirmarlos o cancelarlos, clic AQUÍ. </div>
+
+                <div class="panel panel-info block4">
+                    <div class="panel-heading">
+                        Filtros disponibles
+                        <!--<div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="#" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>-->
+                    </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="form-group row">
+                                        @*<label class="col-md-3 col-xl-3">L Nac.</label>*@
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(x => x.Id, ViewBag.lstEspecialidades as IEnumerable<SelectListItem>, "- Buscar especialidades -", new { @id = "EspecialidadId", @class = "form-control text-uppercase", tabindex = 1 })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="form-group row">
+                                        @*<label class="col-md-3 col-xl-3">L Nac.</label>*@
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(x => x.Id, ViewBag.lstMedico as IEnumerable<SelectListItem>, "- Buscar Médico -", new { @id = "Medico", @class = "form-control text-uppercase", tabindex = 2 })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <button class="btn btn-success" id="BuscarTurnos"><span class="fa fa-search">&nbsp;Realizar Búsqueda</span></button>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="form-group row">
+                                        @*<label class="col-md-3 col-xl-3">L Nac.</label>*@
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(x => x.Id, ViewBag.lstFiltros as IEnumerable<SelectListItem>, "", new { @id = "Medico", @class = "form-control text-uppercase", tabindex = 2 })
+
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row">
+                                        @*<label class="col-md-3 col-xl-3">L Nac.</label>*@
+                                        <div class="col-sm-9">
+                                           <label>Fecha desde : @DateTime.Now.ToString("dd/mm/yyyy") </label>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <script src="~/Scripts/Turnos/_Turnos.js"></script>
+}
